@@ -6,8 +6,11 @@ SVG arrows with text attached, pointing to dom elements specified.
 * JQuery (Yep that's it!)
 
 ## Steps to implement:
+1. Download the helpOverlay.js file and include on your page like so:
+	* ```<script src="assets/js/helpOverlay.js"/> ```
 1. Attach ids to the dom elements you wish to provide helpful tips for
-2. Create some sort of dom element for the user to interact with, in order to trigger the help overlay, such as a button.
+2. Create some sort of dom element for the user to interact with, in order to trigger the help overlay, such as a button, my favorite is as such, using a font library:
+	* ``` <a class="fa fa-question-circle" id="triggerHelp"></a> ```
 3. Put a click listener on the created 'button' that implements the library for each of the dom elements, as explained in the example.
 
 ## Example Code:
