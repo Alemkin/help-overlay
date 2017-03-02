@@ -1,16 +1,15 @@
 /** @suppress{duplicate} */
-var m = {}; // namespace
+var helpOverlay = {}; // namespace
 
-m.help = {};
 /**
  * Add the help overlay SVG panel.
  */
-m.help.addSVG = function () {
-    var svg = $("<div id='helpsvg' style='width:100%;height:100%;background-color:rgba(0,0,0,0.6);position:absolute;top:0;left:0;z-index:2000'><svg xmlns='http://www.w3.org/2000/svg' style='width:100%;height:100%'><defs><marker id='head' orient='auto' markerWidth='2' markerHeight='4' refX='0.1' refY='2'><path id='headpoly' d='M0,0 V4 L2,2 Z' fill='black'/></marker></defs></svg></div");
+helpOverlay.addSVG = function () {
+    var svg = $("<div id='helpsvg' style='width:100%;height:100%;background-color:rgba(0,0,0,0.6);position:absolute;top:0;left:0;z-index:2000'><svg xmlns='http://www.w3.org/2000/svg' style='width:100%;height:100%'><defs><marker id='head' orient='auto' markerWidth='2' markerHeight='4' refX='0.1' refY='2'><path id='headpoly' d='M0,0 V4 L2,2 Z' fill='black'/></marker></defs></svg></div").click(helpOverlay.remove);
     $(document.body).append(svg);
 }
 
-m.help.remove = function () {
+helpOverlay.remove = function () {
     var svg = $('#helpsvg');
     if (!svg) {
         return;
@@ -26,9 +25,9 @@ m.help.remove = function () {
  * @param {string} pos
  * @param {number=} length
  */
-m.help.addLabel = function (tox, toy, label, pos, length, xaway, yaway) {
+helpOverlay.addLabel = function (tox, toy, label, pos, length, xaway, yaway) {
     var svg = $('#helpsvg svg');
-    if (!svg) {
+    if (!svg || svg.length < 1) {
         return;
     }
     var awayx;
@@ -101,26 +100,30 @@ m.help.addLabel = function (tox, toy, label, pos, length, xaway, yaway) {
  * @param {number=} xaway
  * @param {number=} yaway
  */
-m.help.addLabelTo = function (dom, label, pos, length, xaway, yaway) {
+helpOverlay.addLabelTo = function (dom, label, pos, length, xaway, yaway) {
     if (!dom) {
         return;
+    }
+    var svg = $('#helpsvg');
+    if (!svg || svg.length < 1) {
+        helpOverlay.addSVG();
     }
     var offset = dom.offset();
     var width = dom.width();
     var height = dom.height();
     if (length && length < 0) {
-      m.help.addLabel(offset.left, offset.top, label, pos, length, xaway, yaway);
+      helpOverlay.addLabel(offset.left, offset.top, label, pos, length, xaway, yaway);
     }
     else if (length && xaway && yaway && xaway < 0 && yaway > 0) {
-      m.help.addLabel(offset.left, offset.top + height / 2, label, pos, length, xaway, yaway);
+      helpOverlay.addLabel(offset.left, offset.top + height / 2, label, pos, length, xaway, yaway);
     }
     else if (length && xaway && yaway && xaway > 0 && yaway < 0) {
-      m.help.addLabel(offset.left + width / 2, offset.top, label, pos, length, xaway, yaway);
+      helpOverlay.addLabel(offset.left + width / 2, offset.top, label, pos, length, xaway, yaway);
     }
     else if (length && xaway && yaway && xaway < 0 && yaway < 0) {
-      m.help.addLabel(offset.left, offset.top, label, pos, length, xaway, yaway);
+      helpOverlay.addLabel(offset.left, offset.top, label, pos, length, xaway, yaway);
     }
     else {
-      m.help.addLabel(offset.left + width / 2, offset.top + height / 2, label, pos, length, xaway, yaway);
+      helpOverlay.addLabel(offset.left + width / 2, offset.top + height / 2, label, pos, length, xaway, yaway);
     }
 }
