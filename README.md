@@ -23,6 +23,10 @@ $('#triggerHelp').on('click', function() {
 ```
 The click listener is on a button or link of some sort, represented by '#triggerHelp' id, and when hit, you simply add a label to each of the elements via the method above. 
 
+The library will automatically attach an svg overlay with a listener to close on click for you.
+
+Feel free to change any and all about this when you implement it to fit your needs.
+
 ## Parameters:
 ```javascript
 addLabelTo = function (dom, label, pos, length, xaway, yaway)
